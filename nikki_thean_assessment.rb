@@ -57,7 +57,7 @@ instructors = school[:instructors]
 school[:founded_in] = "2013"
 
 # b. Add a student to the school's students' array.
-students.push( {:name => "Kate", :grade => "A", :semester => "Winter"} )
+students.push( {:name => "Kate", :grade => "A"} )
 
 # c. Remove "Billy" from the students' array.
 students.slice!(1)
@@ -72,7 +72,7 @@ instructors[1][:subject] = "being almost better than Blake"
 students[1][:grade] = "F"
 
 # g. Return the name of the student with a "B".
-students[0][:grade]
+students[0][:name]
 
 # h. Return the subject of the instructor "Jeff".
 instructors[2][:subject]
@@ -107,7 +107,7 @@ end
 return_grade(students, "Frank")
 
 #ii. Then use it to refactor your work in 3.i.
-
+# Kate and I told Blake we don't understand this question and he said to ignore it for now
 
 # b. 
 # i. Create a method to update a instructor's subject given the instructor and the new subject. 
@@ -124,12 +124,12 @@ update_instructor(instructors, "Blake", "being terrible")
 
 # c. 
 # i. Create a method to add a new student to the schools student array. 
-def new_student(list, name, grade)
-	list.push( {:name => name, :grade => grade} )
+def new_student(list, name, grade, semester)
+	list.push( {:name => name, :grade => grade, :semester => semester} )
 end
 
 #ii. Then use it to add yourself to the school students array.
-new_student(students, "Nikki", "A")
+new_student(students, "Nikki", "A", "Winter")
 
 # d. 
 #i. Create a method that adds a new key at the top level of the school hash, given a key and a value. 
@@ -146,14 +146,24 @@ new_key(school, :ranking, "1")
 # a. Create a bare bones class definition for a School class.
 class School
 
+	# g. Create an array constant SCHOOLS that stores all instances of your School class.
+	SCHOOLS = []
+
+	# h. Create a class method reset that will empty the SCHOOLS constant.
+	def School.reset
+		School::SCHOOLS.clear
+	end
+
 	# c. Create an attr_accessor for name, location, instructors, and students. Create an attr_reader for ranking.
 	attr_accessor :name, :location, :instructors, :students
 	attr_reader :ranking
 
 	# b. Define an initialize method for the School class...etc.
 	def initialize(name, location, ranking, students, instructors)
-	# Since we were asked to put in a parameter for each instance variable, I've made it so you can pass in a hash as an argument
-	# for students and instructors and it will be placed in the array. 
+	# Since we were asked to put in a parameter for each instance variable, here you can pass in a hash as an argument
+	# for students and instructors and it will be placed in the array. It could also just be left as a blank array 
+	# so you can use the methods defined later to add students (but there is no instructor method).
+	#OverthinkingIt
 		@name = name
 		@location = location
 		@ranking = ranking
@@ -179,15 +189,6 @@ class School
 				students.delete(student)
 			end
 		end
-	end
-
-	# g. Create an array constant SCHOOLS that stores all instances of your School class.
-	SCHOOLS = []
-	# School#initialize stores each new school in SCHOOLS
-
-	# h. Create a class method reset that will empty the SCHOOLS constant.
-	def School.reset
-		School::SCHOOLS.clear
 	end
 
 end
@@ -265,7 +266,7 @@ end
 
 # a. What should this Class print to the screen when defined/loaded?
 # "hello"
-# Student (as in the class)
+# Student (as in the name of the class)
 
 # b. What should this Class print to the screen when defined/loaded?
 # Student
